@@ -1,7 +1,7 @@
 # PigroMetro
 
-PigroMetro    :flag-it:
-L'app per chi lavora viaggiando  :car:
+L'app per chi lavora viaggiando!  :car:
+
 Caricando delle registrazioni **audio** con le informazioni del viaggio fatto, l'app automaticamente calcolerà il chilometraggio. Una registrazione deve avere la seguente struttura:
 *data*   **'partenza'**   *luogo di partenza*   **'arrivo'**   *luogo di arrivo*"
 Dove le parole **'partenza'** e **'arrivo'** devo essere presenti obbligatoriamente.
