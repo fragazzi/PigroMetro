@@ -22,7 +22,8 @@ def main():
         st.title("Seleziona un modello:")
         model_selected = st.selectbox(
             'Modelli disponibili:',
-            ('tiny', 'base', 'small', 'medium', 'large')
+            ('tiny', 'base', 'small', 'medium', 'large'),
+            index=1
         )
         
     
