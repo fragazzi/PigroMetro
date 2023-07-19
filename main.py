@@ -38,8 +38,9 @@ st.text(f"Modello usato: {model_selected}")
 with st.spinner('Calcolo delle distanze...'):
             
     for file in uploaded_files:
-        if file is not None:          
-            trip_text = whisper_model.transcribe(file)["text"]
+        if file is not None:
+            st.text(file)
+            trip_text = whisper_model.transcribe(file.name)["text"]
             tokens = trip_text.split(" ")
             tokens = [t for t in tokens if t != '']
             
