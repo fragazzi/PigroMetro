@@ -106,7 +106,7 @@ if not df.empty:
     )
 
     st.download_button(
-        label="Export Lineups",
+        label="Salva tabella",
         data=convert_df_to_csv(df),
         file_name='Percorsi.csv',
         mime='text/csv',
