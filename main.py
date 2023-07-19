@@ -39,7 +39,7 @@ with st.spinner('Calcolo delle distanze...'):
             
     for file in uploaded_files:
         if file is not None:          
-            trip_text = whisper_model.transcribe(f"./{file.name}")["text"]
+            trip_text = whisper_model.transcribe(file)["text"]
             tokens = trip_text.split(" ")
             tokens = [t for t in tokens if t != '']
             
