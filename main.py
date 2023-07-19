@@ -93,5 +93,5 @@ def main():
                 finally:
                     st.text("Tabella scaricata!")
 
-#if __name__ == "__main__":
-#    main()
+if __name__ == "__main__":
+    main()
