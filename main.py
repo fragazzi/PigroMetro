@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import whisper
 
+from tempfile import NamedTemporaryFile
+
 from utils import *
 
 st.title("PigroMetro    :flag-it:")
