@@ -36,8 +36,12 @@ id_list, date_list, dep_list, arr_list, km_list = [], [], [], [], []
 
 st.text(f"Modello usato: {model_selected}")
 with st.spinner('Calcolo delle distanze...'):
+            
     for file in uploaded_files:
-        if file is not None:  
+        if file is not None: 
+
+            file.write(file.getvalue())
+                    
             trip_text = whisper_model.transcribe(file.name)["text"]
             tokens = trip_text.split(" ")
             tokens = [t for t in tokens if t != '']
