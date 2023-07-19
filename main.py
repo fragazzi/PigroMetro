@@ -6,6 +6,13 @@ from tempfile import NamedTemporaryFile
 
 from utils import *
 
+
+@st.cache
+def convert_df_to_csv(df):
+  # IMPORTANT: Cache the conversion to prevent computation on every rerun
+  return df.to_csv().encode('utf-8')
+
+
 st.title("PigroMetro    :flag-it:")
 st.header("L'app per chi lavora viaggiando  :car:")
 st.markdown("Caricando delle registrazioni **audio** con le informazioni del viaggio fatto, l'app "
@@ -31,23 +38,28 @@ with st.sidebar:
 whisper_model = whisper.load_model(model_selected)
     
 # Upload files
-uploaded_files = st.file_uploader("Seleziona file audio", type=["ogg", "mp3"], accept_multiple_files=True)
+uploaded_files = st.file_uploader(
+    "Seleziona file audio", 
+    type=["ogg", "mp3"], 
+    accept_multiple_files=True
+)
 
 # Data lists for table
 id_list, date_list, dep_list, arr_list, km_list = [], [], [], [], []
 
 st.text(f"Modello usato: {model_selected}")
 with st.spinner('Calcolo delle distanze...'):
-            
+    
     for file in uploaded_files:
-        if file is not None:
+        if file is not None: 
             with NamedTemporaryFile(suffix="ogg") as temp:
                 temp.write(file.getvalue())
                 temp.seek(0)
-                        
+        
+                # result = model.transcribe(temp.name)
+                
                 trip_text = whisper_model.transcribe(temp.name)["text"]
-
-                    
+            
             tokens = trip_text.split(" ")
             tokens = [t for t in tokens if t != '']
             
@@ -93,9 +105,16 @@ if not df.empty:
         hide_index=True
     )
 
-    if st.button("Download excel"):
-        with st.spinner("Download in corso..."):
-            try:
-                df.to_excel("Percorsi.xlsx", index=False)
-            finally:
-                st.text("Tabella scaricata!")
+    st.download_button(
+        label="Export Lineups",
+        data=convert_df_to_csv(df),
+        file_name='Percorsi.csv',
+        mime='text/csv',
+    )
+    
+    # if st.button("Download excel"):
+    #     with st.spinner("Download in corso..."):
+    #         try:
+    #             df.to_excel("Percorsi.xlsx", index=False)
+    #         finally:
+    #             st.text("Tabella scaricata!")
